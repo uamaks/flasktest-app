@@ -2,10 +2,25 @@
 
 {% block title %}Список доступных материалов{% endblock %}
 {% block body %}
-    {% for book in booklist %}
-    <div class="alert alert-primary">
-        <h3>{{ book[0] }}: {{ book[2] }}</h3>
-        <p>{{ book[3] }}</p>
-    </div>
-    {% endfor %}
+    <table class="table table-condensed table-hover table-bordered">
+        <caption>Заголовок таблицы</caption>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>код</th>
+                <th>Название</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for book in booklist %}
+            <tr>
+                <td>{{ book[0] }}</td>
+                <td>{{ book[1] }}</td>
+                <td>{{ book[2] }}</td>
+                <td style="font-size:8pt">{{ book[3] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
