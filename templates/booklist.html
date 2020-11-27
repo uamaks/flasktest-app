@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Список доступных материалов{% endblock %}
+{% block body %}
+    {% for book in booklist %}
+    <div class="alert alert-primary">
+        <h3>{{ book[0] }}: {{ book[2] }}</h3>
+        <p>{{ book[3] }}</p>
+    </div>
+    {% endfor %}
+{% endblock %}

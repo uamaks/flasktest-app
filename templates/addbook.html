@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная страница{% endblock %}
+{% block body %}
+<div class="container">
+    <h1>Добавление книги</h1>
+    <form method="post">
+        <input type="text" name="code" id="code" class="form-control" placeholder="Код"><br>
+        <input type="text" name="title" id="title" class="form-control" placeholder="Название"><br>
+        <textarea name="description" id="description" class="form-control" placeholder="Краткоек описание"></textarea><br>
+        <input type="text" name="file" id="file" class="form-control" placeholder="Выбор файла для загрузки"><br>
+        <input type="submit" class="btn btn-success" value="Сохранить"><br>
+    </form>
+</div>
+{% endblock %}
