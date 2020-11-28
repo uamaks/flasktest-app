@@ -8,6 +8,40 @@ def index():
     return render_template("index.html")
 
 
+@app.route('/about')
+def about():
+    return render_template("about.html")
+
+# block user-----------------------------------
+
+
+@app.route('/registry', methods=['POST', 'GET'])
+def registry():
+    if request.method == 'POST':
+        alias = request.form['login']
+        email = request.form['email']
+        password1 = request.form['password1']
+        password2 = request.form['password2']
+        # проверить данные
+        if password1 != password2:
+            res = "Пароль и его подтверждение не совпадают..."
+            return render_template('/registry.html', mess=res)
+
+
+        from app.models.users import add_user
+        res = add_user(alias=alias, email=email, password=password1)
+        if type(res) == int:
+            # если новый пользователь зарегистрирован - страница подтверждения регистрации
+            confirmref = "http://127.0.0.1:5000/confirmreg"
+            # отправить email
+            return render_template('/entry.html', mess='Для завершения регистрации перейдите по ссылке, отправленной Вам на указанный email')
+        else:
+            # если нет - на страницу регистрации
+            return render_template('/registry.html', mess=res)
+    else:
+        return render_template('/registry.html')
+
+
 @app.route('/entry', methods=['POST', 'GET'])
 def entry():
     if request.method == 'POST':
@@ -23,9 +57,14 @@ def entry():
             return render_template('/index.html', mess='Вход выполнен')
         else:
             # если нет - на страницу регистрации
-            return render_template('entry.html', mess=res)
+            return render_template('/entry.html', mess=res)
     else:
-        return render_template('entry.html')
+        return render_template('/entry.html')
+
+
+@app.route('/userpage/<string:name>')
+def userpage(name):
+    return "Станица пользоватея: " + name
 
 
 @app.route('/logout')
@@ -35,14 +74,13 @@ def logout():
     return  redirect(url_for('index'))
 
 
-@app.route('/about')
-def about():
-    return render_template("about.html")
 
 
-@app.route('/userpage/<string:name>')
-def userpage(name):
-    return "Станица пользоватея: " + name
+
+
+
+
+
 
 
 @app.route('/addbook', methods=['POST', 'GET'])

@@ -85,10 +85,15 @@ def add_user(**user):
 			return res
 		
 	#email проверка на корректность...
-	email = user.get('password')
-	if email != None and str('email') != "email":#некорректный email
+	email = user.get('email')
+	if email is None:#некорректный email
+		res = 'не указан email'
+		return res
+	elif email == "":
 		res = 'введен неверный email'
 		return res
+
+
 
 	#остальные поля пока не проверем...
 	#хеширование пароля
