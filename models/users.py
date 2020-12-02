@@ -4,14 +4,17 @@ from hashlib import md5
 
 def get_user_id(id=0):
 	"""Returns the record(tuple) of one user with identifiers id(int, bigint). """
-	cnn = db_connect()
+	cnn = db_connect(True)
 	cur = cnn.cursor()
 	cur.execute(f'SELECT * FROM users WHERE id = {id}')
 	res = cur.fetchone()
 	db_close(cnn)
-	
-	if res is None:
-		res = ()
+
+	if res == None:
+		res = {}
+	else:
+		res = dict(res)
+
 	return res
 
 

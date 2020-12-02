@@ -3,15 +3,21 @@
 {% block title %}Профиль{% endblock %}
 {% block body %}
 <div class="container">
-    <h1>Профиль пользователя {{ name }}</h1>
-    <p>Код: Дата регистрации: Статус: </p>
+    <h1>Профиль пользователя {{ user['login'] }}</h1>
+    <p>{{ user }}</p>
+    <p>Код: {{ user['id'] }}; Дата регистрации: Статус: {{ user['active'] }}</p>
     <form method="post">
-        <input style="margin-bottom: 0" type="text" name="login" id="login" class="form-control" placeholder="Введите логин, который будет отображаться на сайте">
+        <input style="margin-bottom: 0" type="text" name="login" id="login" class="form-control">
         <p style="padding: 0; height: 8px; font-size: smaller; color: #000080; font-style: italic">* логин должен состоять из 3-16 символов и может содеражать только буквы, цифры и смвол "_"</p><br>
         <input type="text" name="email" id="email" class="form-control" placeholder="Введите реальный адрес электронной почты"><br>
-        <input type="text" name="password1" id="password1" class="form-control" placeholder="Введите пароль"><br>
-        <input type="text" name="password2" id="password2" class="form-control" placeholder="Повторите пароль"><br>
+        <input type="text" name="email" id="birthday" class="form-control" placeholder="Введите реальный адрес электронной почты"><br>
         <input type="submit" class="btn btn-light" value="Регистрация"><br>
+    </form><br>
+    <form method="post">
+        <input type="text" name="password1" id="passwordold" class="form-control" placeholder="Введите текущий пароль"><br>
+        <input type="text" name="password1" id="password1" class="form-control" placeholder="Введите новый пароль"><br>
+        <input type="text" name="password2" id="password2" class="form-control" placeholder="Повторите новый пароль"><br>
+        <input type="submit" class="btn btn-light" value="Изменить пароль"><br>
     </form>
 </div>
 {% endblock %}

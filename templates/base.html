@@ -31,7 +31,7 @@
                 {{session['ss_username']}}us
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Профиль</a>
+                    <a class="dropdown-item" href="{{ url_for('userpage', id=2)}}">Профиль</a>
                     <a class="dropdown-item" href="#">История</a>
                     <a class="dropdown-item" href="/logout">Выход</a>
                 </div>
