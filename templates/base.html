@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -23,8 +25,21 @@
         <a class="p-2 text-dark" href="#">Биржа</a>
         </nav>
         <!--<a class="btn btn-warning" href="/addbook">Добавить</a>-->
-        <a class="btn btn-outline-primary" href="/entry">Вход</a>
-        <a class="btn btn-outline-primary" href="/logout">Выход</a>
+        {% if 'ss_username' in session %}
+            <div class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                {{session['ss_username']}}us
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Профиль</a>
+                    <a class="dropdown-item" href="#">История</a>
+                    <a class="dropdown-item" href="/logout">Выход</a>
+                </div>
+            </div>
+        {% else %}
+            <a class="btn btn-outline-primary" href="/entry">Вход</a>
+            <!--<a class="btn btn-outline-primary" href="/logout">Выход</a>-->
+        {% endif %}
     </div>
     <div class="container">
         {% if 'ss_username' in session %}

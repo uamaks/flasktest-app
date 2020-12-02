@@ -48,7 +48,7 @@ def entry():
         alias = request.form['login']
         password = request.form['password']
         # проверить данные
-        from app.models import login_user
+        from app.models.users import login_user
         res = login_user(alias=alias, password=password)
         if type(res) == int:
             # если такой пользователь есть - переходим на предыдушую страницу
@@ -62,9 +62,12 @@ def entry():
         return render_template('/entry.html')
 
 
-@app.route('/userpage/<string:name>')
-def userpage(name):
-    return "Станица пользоватея: " + name
+@app.route('/userpage/<int:id>')
+def userpage(id):
+    #получить данные пользователя
+    from app.models.users import get_user_id
+    res = get_user_id(id)
+    return render_template('/userpage.html', user=res)#передаем словарь
 
 
 @app.route('/logout')
